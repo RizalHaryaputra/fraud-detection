@@ -35,17 +35,9 @@ def load_assets():
 
 @st.cache_data
 def load_sample_data():
-    # Load dataset for simulation
-    # To prevent loading 150MB every time, we just load a sample
-    # In a real app, this would be a database connection
-    df = pd.read_csv("creditcard.csv")
-    
-    # Let's take a sample of 100 fraud and 1900 normal to make simulation interesting
-    fraud_df = df[df['Class'] == 1].sample(min(100, len(df[df['Class'] == 1])), random_state=42)
-    normal_df = df[df['Class'] == 0].sample(1900, random_state=42)
-    
-    sample_df = pd.concat([fraud_df, normal_df]).sample(frac=1, random_state=42).reset_index(drop=True)
-    return sample_df
+    # Load sample dataset (karena creditcard.csv asli 150MB tidak diunggah ke Git)
+    df = pd.read_csv("sample_creditcard.csv")
+    return df
 
 try:
     model, scaler_amount, scaler_time, selected_features, feature_names = load_assets()
